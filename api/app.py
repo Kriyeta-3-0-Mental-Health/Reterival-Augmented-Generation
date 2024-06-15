@@ -8,6 +8,10 @@ from langchain_community.llms import Ollama
 from dotenv import load_dotenv
 
 load_dotenv()
+# os.environ['OPENAI_API_KEY']=os.getenv("OPENAI_API_KEY")
+## Langmith tracking
+os.environ["LANGCHAIN_TRACING_V2"]="true"
+os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
 
 app = FastAPI(
     title="Langchain server",
@@ -26,7 +30,7 @@ llm = Ollama(model="llama3")
 
 
 # prompt1=ChatPromptTemplate.from_template("Write me an essay about {topic} with 100 words")
-prompt2=ChatPromptTemplate.from_template("Write me an poem about {topic} for a 5 years child with 100 words")
+prompt2=ChatPromptTemplate.from_template("Give 2 paragraph of 30 word about {topic} considering a mentally ill person .")
 
 # add_routes(
 #     app,
@@ -41,4 +45,4 @@ add_routes(
 )
 
 if __name__=="__main__":
-    uvicorn.run(app,host="localhost",port=8200)
+    uvicorn.run(app,host="localhost",port=8000)
